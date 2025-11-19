@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  webhook-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: webhook-uangkas
+    ports:
+      - "8080:8080"
+    environment:
+      # Database Configuration
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgres:5432/webhook_db
+      QUARKUS_DATASOURCE_USERNAME: lifestyle
+      QUARKUS_DATASOURCE_PASSWORD: ismailganteng
+      
+      # Flyway Configuration
+      QUARKUS_FLYWAY_MIGRATE_AT_START: "true"
+      
+      # Webhook Configuration
+      WEBHOOK_SECRET: 7toU/dBMNYpSQpMYMXUTPywrPmrbv6vOkqa7Y8f7tHw=
+      WEBHOOK_VALIDATION_ENABLED: "false"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - webhook-network
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: webhook-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: webhook_db
+      POSTGRES_USER: lifestyle
+      POSTGRES_PASSWORD: ismailganteng
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lifestyle -d webhook_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - webhook-network
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+    driver: local
+
+networks:
+  webhook-network:
+    driver: bridge
