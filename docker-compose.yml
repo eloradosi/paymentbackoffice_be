@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   webhook-app:
@@ -13,10 +13,10 @@ services:
       QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgres:5432/webhook_db
       QUARKUS_DATASOURCE_USERNAME: lifestyle
       QUARKUS_DATASOURCE_PASSWORD: ismailganteng
-      
+
       # Flyway Configuration
       QUARKUS_FLYWAY_MIGRATE_AT_START: "true"
-      
+
       # Webhook Configuration
       WEBHOOK_SECRET: 7toU/dBMNYpSQpMYMXUTPywrPmrbv6vOkqa7Y8f7tHw=
       WEBHOOK_VALIDATION_ENABLED: "false"
