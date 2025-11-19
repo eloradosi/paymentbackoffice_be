@@ -1,0 +1,30 @@
+{
+  "data": {
+    "runId": "2025-11-17-143616",
+    "runType": "MANUAL-EMAIL",
+    "runTime": "2025-11-17T14:36:16.8599414",
+    "totalRowsRead": 3,
+    "totalUnpaidFound": 3,
+    "totalPaidFound": 0,
+    "totalMessagesSent": 3,
+    "totalMessagesFailed": 0,
+    "list": [
+      {
+        "id": "1",
+        "receiver": "eloradosi4@gmail.com",
+        "time": "2025-11-17T14:36:16",
+        "status": "Sent",
+        "channel": "email",
+        "message": "Notifikasi telah terkirim."
+      },
+      {
+        "id": "2",
+        "receiver": "user2@example.com",
+        "time": "2025-11-17T14:36:20",
+        "status": "Sent",
+        "channel": "email",
+        "message": "Pembayaran jatuh tempo."
+      }
+    ]
+  }
+}

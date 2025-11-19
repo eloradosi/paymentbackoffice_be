@@ -1,0 +1,55 @@
+# -----------------------
+# Spring Boot / Maven
+# -----------------------
+target/
+*.jar
+*.war
+*.log
+logs/
+
+# Allow mvnw wrapper JAR
+!.mvn/wrapper/maven-wrapper.jar
+
+# Ignore build inside test/main modules
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# -----------------------
+# IDE
+# -----------------------
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+# -----------------------
+# OS files
+# -----------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------
+# NetBeans
+# -----------------------
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# -----------------------
+# Quarkus (if any)
+# -----------------------
+.quarkus/
+git remote add origin https://github.com/eloradosi/paymentbackoffice_be.git
