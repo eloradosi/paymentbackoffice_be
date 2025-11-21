@@ -67,6 +67,12 @@
             <artifactId>quarkus-arc</artifactId>
         </dependency>
         
+        <!-- Quarkus Mailer -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-mailer</artifactId>
+        </dependency>
+        
         <!-- Test Dependencies -->
         <dependency>
             <groupId>io.quarkus</groupId>

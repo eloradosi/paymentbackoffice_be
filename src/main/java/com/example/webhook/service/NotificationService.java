@@ -25,6 +25,9 @@ public class NotificationService {
     @Inject
     NotificationRepository repo;
 
+    @Inject
+    EmailService emailService;
+
     @Transactional
     public NotificationEntity save(NotificationRequest req) {
         NotificationEntity n = new NotificationEntity();
@@ -93,6 +96,21 @@ public class NotificationService {
                 repo.persist(n);
                 savedList.add(n);
                 System.out.println("Saved notification: " + n.receiver + " - " + n.status);
+                System.out.println("DEBUG: Checking if status is 'failed'. Current status: '" + n.status + "'");
+                
+                // Kirim email alert jika status adalah "failed"
+                if (n.status != null && n.status.equalsIgnoreCase("failed")) {
+                    System.out.println("⚠ Failed status detected! Calling email service...");
+                    try {
+                        emailService.sendFailedNotificationAlert(n);
+                        System.out.println("Email service called successfully");
+                    } catch (Exception emailEx) {
+                        System.err.println("ERROR calling email service: " + emailEx.getMessage());
+                        emailEx.printStackTrace();
+                    }
+                } else {
+                    System.out.println("Status is not 'failed', skipping email alert. Status: " + n.status);
+                }
             } catch (Exception e) {
                 System.out.println("ERROR saving notification: " + e.getMessage());
                 e.printStackTrace();

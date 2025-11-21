@@ -20,6 +20,12 @@ services:
       # Webhook Configuration
       WEBHOOK_SECRET: 7toU/dBMNYpSQpMYMXUTPywrPmrbv6vOkqa7Y8f7tHw=
       WEBHOOK_VALIDATION_ENABLED: "false"
+      
+      # Email Configuration (Youtoria SMTP)
+      MAILER_USERNAME: ${MAILER_USERNAME:-no-reply@youtoria.live}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-23,eneuRR,:}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@youtoria.live}
+      NOTIFICATION_EMAIL_ENABLED: "true"
     depends_on:
       postgres:
         condition: service_healthy
