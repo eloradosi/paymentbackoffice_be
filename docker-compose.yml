@@ -9,8 +9,8 @@ services:
     ports:
       - "8081:8080"
     environment:
-      # Database Configuration
-      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgres:5432/webhook_db
+      # Database Configuration - Using external PostgreSQL (existing data)
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://159.65.0.183:5432/webhook_db
       QUARKUS_DATASOURCE_USERNAME: lifestyle
       QUARKUS_DATASOURCE_PASSWORD: ismailganteng
 
@@ -24,38 +24,13 @@ services:
       # Email Configuration (Youtoria SMTP)
       MAILER_USERNAME: ${MAILER_USERNAME:-no-reply@youtoria.live}
       SMTP_PASSWORD: ${SMTP_PASSWORD:-23,eneuRR,:}
-      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@youtoria.live}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-addplay44@gmail.com}
       NOTIFICATION_EMAIL_ENABLED: "true"
-    depends_on:
-      postgres:
-        condition: service_healthy
     networks:
       - webhook-network
     restart: unless-stopped
 
-  postgres:
-    image: postgres:15-alpine
-    container_name: webhook-postgres
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_DB: webhook_db
-      POSTGRES_USER: lifestyle
-      POSTGRES_PASSWORD: ismailganteng
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U lifestyle -d webhook_db"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - webhook-network
-    restart: unless-stopped
-
-volumes:
-  postgres-data:
-    driver: local
+  # PostgreSQL container removed - using external database at 159.65.0.183
 
 networks:
   webhook-network:
